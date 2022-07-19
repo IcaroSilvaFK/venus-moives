@@ -8,4 +8,14 @@ export class MovieService implements IMovieService {
   async create(data: MovieDTO): Promise<void> {
     await this.movieRepositort.create(data);
   }
+
+  async getAllMovies(): Promise<MovieDTO[]> {
+    const movies = await this.movieRepositort.getAllMovies();
+    return movies;
+  }
+
+  async getMoviesByTitle(title: string): Promise<MovieDTO> {
+    const movies = await this.movieRepositort.getMoviesByTitle(title);
+    return movies;
+  }
 }

@@ -1,12 +1,11 @@
 import { DataTypes } from 'sequelize';
 import { DB } from 'src/config/DB';
-import { MovieDTO } from 'src/Interfaces/DTOInterface/MovieDTO';
+import { SerieDTO } from 'src/Interfaces/DTOInterface/SerieDTO';
 import { IModel } from 'src/Interfaces/ModelsInterface/IModel';
 import { Genre } from './Genre';
-import { Serie } from './Serie';
 
-const Movie: IModel<MovieDTO> = DB.define('movies', {
-  movie_id: {
+const Serie: IModel<SerieDTO> = DB.define('series', {
+  serie_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
@@ -17,10 +16,6 @@ const Movie: IModel<MovieDTO> = DB.define('movies', {
     allowNull: false
   },
   released: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  runtime: {
     type: DataTypes.STRING,
     allowNull: false
   },
@@ -46,11 +41,11 @@ const Movie: IModel<MovieDTO> = DB.define('movies', {
   }
 });
 
-Movie.hasMany(Genre, {
-  foreignKey: 'fk_movie_id'
+Serie.hasMany(Genre, {
+  foreignKey: 'fk_serie_id'
 });
 Genre.belongsTo(Serie, {
-  foreignKey: 'fk_movie_id'
+  foreignKey: 'fk_serie_id'
 });
 
-export { Movie };
+export { Serie };
