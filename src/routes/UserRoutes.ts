@@ -5,6 +5,6 @@ const router = Router();
 
 const controller = new UserController();
 
-router.post('/movies/save');
+router.post('/account');
 
 export { router };

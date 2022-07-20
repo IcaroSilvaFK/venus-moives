@@ -1,6 +1,6 @@
 import { Request, Response } from 'express-serve-static-core';
 import { IController } from 'src/Interfaces/ControllerInterface/IController';
-import { UserDTO } from 'src/Interfaces/DTOInterface/UserDTO';
+import { UserDTO } from 'src/Interfaces/DataInterface/IUser';
 import { User } from 'src/Models/User';
 import { UserRepository } from 'src/Repositories/UserRepository';
 import { UserService } from 'src/Services/UserService';

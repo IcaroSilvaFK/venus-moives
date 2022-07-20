@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
 import { DB } from 'src/config/DB';
-import { UserDTO } from 'src/Interfaces/DTOInterface/UserDTO';
+import { IUser } from 'src/Interfaces/DataInterface/IUser';
 import { IModel } from 'src/Interfaces/ModelsInterface/IModel';
 
-const User: IModel<UserDTO> = DB.define('users', {
+const User: IModel<IUser> = DB.define('users', {
   user_id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,

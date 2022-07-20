@@ -1,7 +1,8 @@
-export interface SerieDTO {
-  serie_id?: string;
+export interface IContent {
+  content_id?: string;
   title: string;
   released: string;
+  runtime?: string;
   director: string;
   plot: string;
   language: string;

@@ -1,5 +1,5 @@
-import { UserDTO } from '../DTOInterface/UserDTO';
+import { IUser } from '../DataInterface/IUser';
 
 export interface IUserService {
-  create: (data: UserDTO) => Promise<void>;
+  create: (data: IUser) => Promise<void>;
 }
