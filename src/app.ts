@@ -1,8 +1,7 @@
 import express from 'express';
 import { DB } from './config/DB';
-import { router as userRoutes } from './routes/UserRoutes';
-import { router as movieRoutes } from './routes/MovieRoutes';
-import { router as serieRouter } from './routes/SerieRoutes';
+import { router as user_routes } from './routes/UserRoutes';
+import { router as content_routes } from './routes/ContentRoutes';
 
 const app = express();
 
@@ -19,8 +18,7 @@ app.use(express.json());
   }
 })();
 
-app.use('/api', userRoutes);
-app.use('/api', movieRoutes);
-app.use('/api', serieRouter);
+app.use('/api', user_routes);
+app.use('/api', content_routes);
 
 export { app };

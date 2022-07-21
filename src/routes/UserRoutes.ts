@@ -5,6 +5,6 @@ const router = Router();
 
 const controller = new UserController();
 
-router.post('/account');
+router.post('/account', controller.store);
 
 export { router };

@@ -8,4 +8,7 @@ export interface IContent {
   language: string;
   poster: string;
   country: string;
+  genre: string;
+  category: string;
+  season?: string;
 }
