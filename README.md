@@ -29,7 +29,7 @@ O corpo da requisição deve vir no formato JSON contendo os seguintes campos:
  
 -----------------------------
 
-### Endpoint para listar todos os filmes cadastrados
+### Endpoint para listar todos os filmes salvos
 
 >***GET***
 
