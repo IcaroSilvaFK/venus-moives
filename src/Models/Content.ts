@@ -41,10 +41,6 @@ const Content: IModel<IContent> = DB.define('contents', {
   genre: {
     type: DataTypes.JSON,
     allowNull: false
-  },
-  category: {
-    type: DataTypes.STRING,
-    allowNull: false
   }
 });
 

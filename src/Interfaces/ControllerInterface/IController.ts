@@ -21,4 +21,8 @@ export interface IController {
     req: Request,
     res: Response
   ) => Promise<Response<any, Record<string, any>>>;
+  indexGenres?: (
+    req: Request,
+    res: Response
+  ) => Promise<Response<any, Record<string, any>>>;
 }
