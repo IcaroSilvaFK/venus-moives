@@ -22,7 +22,7 @@ O corpo da requisição deve vir no formato JSON contendo os seguintes campos:
  3. runtimem ***(string)***
  4. director ***(string)***
  5. plot ***(string)***
- 6. language ***(string)***
+ 6. language ***(array)***
  7. poster ***(string)***
  8. country ***(string)***
  9. genre ***(array)***
