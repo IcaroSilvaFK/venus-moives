@@ -1,7 +1,7 @@
-import { IContent } from '../DataInterface/IContent';
+import { IContent } from '../Data/IContent';
 
-export interface IContentRepository {
-  create: (data: IContent) => Promise<void>;
+export interface IContentService {
+  createContent: (data: IContent) => Promise<void>;
   getContentByTitle: (title: string) => Promise<IContent | null>;
   getAllContents: () => Promise<IContent[]>;
   getContentsByGenre: (genre: string) => Promise<IContent[]>;

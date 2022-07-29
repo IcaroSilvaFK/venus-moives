@@ -1,12 +1,12 @@
 export interface IContent {
-  content_id?: string;
+  id?: string;
   title: string;
   released: string;
   runtime: string;
   director: string;
   plot: string;
-  language: string;
+  language: string[];
   poster: string;
   country: string;
-  genre: string;
+  genre: string[];
 }

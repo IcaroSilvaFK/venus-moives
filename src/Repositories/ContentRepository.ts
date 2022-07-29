@@ -1,7 +1,8 @@
+import { generateKey } from 'crypto';
 import { Model, Op, where } from 'sequelize';
-import { IContent } from 'src/Interfaces/DataInterface/IContent';
-import { IModel } from 'src/Interfaces/ModelsInterface/IModel';
-import { IContentRepository } from 'src/Interfaces/RepositoryInterface/IContentRepository';
+import { IContent } from 'src/Interfaces/Data/IContent';
+import { IModel } from 'src/Interfaces/Model/IModel';
+import { IContentRepository } from 'src/Interfaces/Repository/IContentRepository';
 
 export class ContentRepository implements IContentRepository {
   constructor(private contentModel: IModel<IContent>) {}
@@ -39,7 +40,7 @@ export class ContentRepository implements IContentRepository {
       where: {
         genre: {
           [Op.substring]: genre
-        }
+        } as any
       }
     });
     return contents;
@@ -48,7 +49,7 @@ export class ContentRepository implements IContentRepository {
   async deleteContent(id: string) {
     await this.contentModel.destroy({
       where: {
-        content_id: id
+        id: id
       }
     });
   }
@@ -68,7 +69,7 @@ export class ContentRepository implements IContentRepository {
       },
       {
         where: {
-          content_id: id
+          id: id
         }
       }
     );

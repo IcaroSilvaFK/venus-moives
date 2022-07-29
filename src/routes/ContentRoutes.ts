@@ -11,4 +11,5 @@ router.get('/movies', controller.index);
 router.get('/movies/genre/:genre', controller.indexGenres);
 router.delete('/movie/delete/:id', controller.delete);
 router.put('/movie/update/:id', controller.update);
+
 export { router };

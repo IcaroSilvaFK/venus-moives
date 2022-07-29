@@ -1,7 +1,7 @@
 import { HttpError } from 'src/Exeptions/HttpError';
-import { IContent } from 'src/Interfaces/DataInterface/IContent';
-import { IContentRepository } from 'src/Interfaces/RepositoryInterface/IContentRepository';
-import { IContentService } from 'src/Interfaces/ServiceInterface/IContentService';
+import { IContent } from 'src/Interfaces/Data/IContent';
+import { IContentRepository } from 'src/Interfaces/Repository/IContentRepository';
+import { IContentService } from 'src/Interfaces/Service/IContentService';
 
 export class ContentService implements IContentService {
   constructor(private contentRepository: IContentRepository) {}
@@ -16,13 +16,26 @@ export class ContentService implements IContentService {
     const emptyFields = await this.hasEmptyFields(data);
     if (emptyFields) throw new HttpError(400, 'The fields must be filled');
 
-    const contentExists = await this.contentRepository.getContentByTitle(
-      data.title
+    const { genre } = data;
+    const genre_parsed = genre.map((values) =>
+      values
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
     );
-    if (contentExists)
-      throw new HttpError(400, 'This movie is already registered');
 
-    await this.contentRepository.create(data);
+    const _data = {
+      title: data.title,
+      released: data.released,
+      runtime: data.runtime,
+      director: data.director,
+      plot: data.plot,
+      language: data.language,
+      poster: data.poster,
+      country: data.country,
+      genre: genre_parsed
+    };
+    await this.contentRepository.create(_data);
   }
 
   async getContentByTitle(title: string): Promise<IContent | null> {
@@ -37,7 +50,14 @@ export class ContentService implements IContentService {
   }
 
   async getContentsByGenre(genre: string): Promise<IContent[]> {
-    const contents = await this.contentRepository.getContentsByGenre(genre);
+    const _genre = genre
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+
+    console.log(_genre);
+
+    const contents = await this.contentRepository.getContentsByGenre(_genre);
     if (!contents) throw new HttpError(404, 'content not available');
 
     return contents;

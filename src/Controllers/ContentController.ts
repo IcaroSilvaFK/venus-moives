@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { IController } from 'src/Interfaces/ControllerInterface/IController';
-import { IContent } from 'src/Interfaces/DataInterface/IContent';
+import { Controller } from 'src/Controllers/Controller';
+import { IContent } from 'src/Interfaces/Data/IContent';
 import { Content } from 'src/Models/Content';
 import { ContentRepository } from 'src/Repositories/ContentRepository';
 import { ContentService } from 'src/Services/ContentService';
@@ -8,7 +8,7 @@ import { ContentService } from 'src/Services/ContentService';
 const contentRepository = new ContentRepository(Content);
 const contentService = new ContentService(contentRepository);
 
-export class ContentController implements IController {
+export class ContentController implements Controller {
   async store(req: Request, res: Response) {
     const data: IContent = req.body;
     try {
@@ -23,8 +23,8 @@ export class ContentController implements IController {
   async show(req: Request, res: Response) {
     const { title } = req.params;
     try {
-      const content = await contentService.getContentByTitle(title);
-      return res.status(200).json({ status_code: 200, content });
+      const item = await contentService.getContentByTitle(title);
+      return res.status(200).json( item );
     } catch (error) {
       console.error(error);
       return res.status(400).json({ error });
@@ -33,8 +33,8 @@ export class ContentController implements IController {
 
   async index(req: Request, res: Response) {
     try {
-      const contents = await contentService.getAllContents();
-      return res.status(200).json({ status_code: 200, contents });
+      const items = await contentService.getAllContents();
+      return res.status(200).json( items );
     } catch (error) {
       console.error(error);
       return res.status(400).json({ error });
@@ -44,8 +44,8 @@ export class ContentController implements IController {
   async indexGenres(req: Request, res: Response) {
     const { genre } = req.params;
     try {
-      const contents = await contentService.getContentsByGenre(genre);
-      return res.status(200).json({ status_code: 200, contents });
+      const items = await contentService.getContentsByGenre(genre);
+      return res.status(200).json( items );
     } catch (error) {
       console.error(error);
       return res.status(200).json({ error });

@@ -1,10 +1,10 @@
 import { DataTypes } from 'sequelize';
 import { DB } from 'src/config/DB';
-import { IUser } from 'src/Interfaces/Data/IUser';
+import { IGenre } from 'src/Interfaces/Data/IGenre';
 import { IModel } from 'src/Interfaces/Model/IModel';
 
-const User: IModel<IUser> = DB.define(
-  'users',
+const Genre: IModel<IGenre> = DB.define(
+  'genres',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -12,19 +12,7 @@ const User: IModel<IUser> = DB.define(
       primaryKey: true,
       allowNull: false
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    age: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    password: {
+    genre: {
       type: DataTypes.STRING,
       allowNull: false
     }
@@ -38,4 +26,4 @@ const User: IModel<IUser> = DB.define(
   }
 );
 
-export { User };
+export { Genre };

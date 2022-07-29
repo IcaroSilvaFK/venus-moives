@@ -1,6 +1,6 @@
 import { Request, Response } from 'express-serve-static-core';
-import { IController } from 'src/Interfaces/ControllerInterface/IController';
-import { IUser } from 'src/Interfaces/DataInterface/IUser';
+import { Controller } from 'src/Controllers/Controller';
+import { IUser } from 'src/Interfaces/Data/IUser';
 import { User } from 'src/Models/User';
 import { UserRepository } from 'src/Repositories/UserRepository';
 import { UserService } from 'src/Services/UserService';
@@ -8,7 +8,7 @@ import { UserService } from 'src/Services/UserService';
 const userRepository = new UserRepository(User);
 const userService = new UserService(userRepository);
 
-export class UserController implements IController {
+export class UserController implements Controller {
   async store(req: Request, res: Response) {
     const data: IUser = req.body;
     try {

@@ -1,6 +1,6 @@
-import { IUser } from 'src/Interfaces/DataInterface/IUser';
-import { IUserRepository } from 'src/Interfaces/RepositoryInterface/IUserRepository';
-import { IUserService } from 'src/Interfaces/ServiceInterface/IUserService';
+import { IUser } from 'src/Interfaces/Data/IUser';
+import { IUserRepository } from 'src/Interfaces/Repository/IUserRepository';
+import { IUserService } from 'src/Interfaces/Service/IUserService';
 
 export class UserService implements IUserService {
   constructor(private userRepository: IUserRepository) {}

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-export interface IController {
+export interface Controller {
   index?: (
     req: Request,
     res: Response
