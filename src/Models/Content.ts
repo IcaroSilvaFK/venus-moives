@@ -1,3 +1,4 @@
+import { link } from 'fs';
 import { DataTypes } from 'sequelize';
 import { DB } from 'src/config/DB';
 import { IContent } from 'src/Interfaces/Data/IContent';
@@ -42,6 +43,10 @@ const Content: IModel<IContent> = DB.define(
     },
     genre: {
       type: DataTypes.JSON,
+      allowNull: false
+    },
+    link: {
+      type: DataTypes.STRING,
       allowNull: false
     }
   },

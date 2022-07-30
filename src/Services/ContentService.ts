@@ -33,6 +33,7 @@ export class ContentService implements IContentService {
       language: data.language,
       poster: data.poster,
       country: data.country,
+      link: data.link,
       genre: genre_parsed
     };
     await this.contentRepository.create(_data);

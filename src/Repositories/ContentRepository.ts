@@ -17,6 +17,7 @@ export class ContentRepository implements IContentRepository {
       language: data.language,
       poster: data.poster,
       country: data.country,
+      link: data.link,
       genre: data.genre
     });
   }

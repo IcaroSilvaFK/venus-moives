@@ -9,4 +9,5 @@ export interface IContent {
   poster: string;
   country: string;
   genre: string[];
+  link: string;
 }
