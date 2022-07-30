@@ -9,6 +9,17 @@ const userRepository = new UserRepository(User);
 const userService = new UserService(userRepository);
 
 export class UserController implements Controller {
+  async login(req: Request, res: Response) {
+    const data: IUser = req.body;
+    try {
+      const token = await userService.login(data);
+      return res.status(200).json({ token });
+    } catch (error) {
+      console.error(error);
+      return res.status(400).json({ error });
+    }
+  }
+
   async store(req: Request, res: Response) {
     const data: IUser = req.body;
     try {
