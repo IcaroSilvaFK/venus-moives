@@ -70,6 +70,7 @@ export class ContentService implements IContentService {
   async updateContent(data: IContent, id: string): Promise<void> {
     const emptyFields = await this.hasEmptyFields(data);
     if (emptyFields) throw new HttpError(400, 'The fields must be filled');
+
     await this.contentRepository.update(data, id);
   }
 }

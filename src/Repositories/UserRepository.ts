@@ -13,4 +13,13 @@ export class UserRepository implements IUserRepository {
       password: data.password
     });
   }
+
+  async findOneByEmail(email: string): Promise<IUser> {
+    const user = await this.userModel.findOne({
+      where: {
+        email: email
+      }
+    });
+    return user?.get() as IUser;
+  }
 }

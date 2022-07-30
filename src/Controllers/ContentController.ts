@@ -23,8 +23,8 @@ export class ContentController implements Controller {
   async show(req: Request, res: Response) {
     const { title } = req.params;
     try {
-      const item = await contentService.findContentByTitle(title);
-      return res.status(200).json(item);
+      const content = await contentService.findContentByTitle(title);
+      return res.status(200).json(content);
     } catch (error) {
       console.error(error);
       return res.status(400).json({ error });
@@ -33,8 +33,8 @@ export class ContentController implements Controller {
 
   async index(req: Request, res: Response) {
     try {
-      const items = await contentService.findAllContents();
-      return res.status(200).json(items);
+      const contents = await contentService.findAllContents();
+      return res.status(200).json(contents);
     } catch (error) {
       console.error(error);
       return res.status(400).json({ error });
@@ -44,8 +44,8 @@ export class ContentController implements Controller {
   async indexGenres(req: Request, res: Response) {
     const { genre } = req.params;
     try {
-      const items = await contentService.findContentsByGenre(genre);
-      return res.status(200).json(items);
+      const contents = await contentService.findContentsByGenre(genre);
+      return res.status(200).json(contents);
     } catch (error) {
       console.error(error);
       return res.status(200).json({ error });

@@ -21,21 +21,10 @@ export class GenreController implements Controller {
     }
   }
 
-  async show(req: Request, res: Response) {
-    const { genre } = req.params;
-    try {
-      const item = await genreService.findGenre(genre);
-      return res.status(200).json(item);
-    } catch (error) {
-      console.error(error);
-      return res.status(400).json({ error });
-    }
-  }
-
   async index(req: Request, res: Response) {
     try {
-      const items = await genreService.findAllGenres();
-      return res.status(200).json(items);
+      const genres = await genreService.findAllGenres();
+      return res.status(200).json(genres);
     } catch (error) {
       console.error(error);
       return res.status(400).json({ error });
