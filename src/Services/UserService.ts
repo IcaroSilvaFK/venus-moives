@@ -9,10 +9,17 @@ export class UserService implements IUserService {
   constructor(private userRepository: IUserRepository) {}
 
   async createUser(data: IUser): Promise<void> {
+    const pattern = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+    const validEmail = pattern.test(data.email);
+    if (!validEmail) throw new HttpError(400, 'invalid e-mail');
+
     const useralreadyexists = await this.userRepository.findOneByEmail(
       data.email
     );
     if (useralreadyexists) throw new HttpError(400, 'user already exists');
+
+    if (data.password!.length < 8)
+      throw new HttpError(400, 'assword must be at least 8 characters long');
 
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(data.password, salt);
