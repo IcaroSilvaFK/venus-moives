@@ -69,4 +69,14 @@ O corpo da requisição deve vir no formato JSON contendo os seguintes campos:
 	
 -----------------------------
 
+### Endpoint para criar um novo gênero
+
+>***POST***
+
+	http://localhost:3000/api/movie/create
+	
+O corpo da requisição deve vir no formato JSON
+ 
+-----------------------------
+
 
