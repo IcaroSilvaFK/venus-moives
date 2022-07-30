@@ -15,23 +15,23 @@ export class GenreService implements IGenreService {
     const emptyFields = await this.hasEmptyFields(data);
     if (emptyFields) throw new HttpError(400, 'The fields must be filled');
 
-    const genre = await this.getGenreByName(data.genre);
+    const genre = await this.findGenre(data.genre);
     if (genre) throw new HttpError(400, 'this genre already exists');
 
     await this.genreRepository.create(data);
   }
 
-  async getGenreByName(genre: string): Promise<IGenre> {
-    const _genre = await this.genreRepository.getGenreByName(genre);
+  async findGenre(genre: string): Promise<IGenre> {
+    const _genre = await this.genreRepository.findOne(genre);
     return _genre;
   }
 
-  async getAllGenres(): Promise<any> {
-    const genres = await this.genreRepository.getAllGenres();
+  async findAllGenres(): Promise<any> {
+    const genres = await this.genreRepository.findAll();
     return genres;
   }
 
-  async deleteGenre(id: string): Promise<void> {
-    await this.genreRepository.deleteGenre(id);
+  async destroyGenre(id: string): Promise<void> {
+    await this.genreRepository.destroy(id);
   }
 }

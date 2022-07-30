@@ -23,8 +23,8 @@ export class ContentController implements Controller {
   async show(req: Request, res: Response) {
     const { title } = req.params;
     try {
-      const item = await contentService.getContentByTitle(title);
-      return res.status(200).json( item );
+      const item = await contentService.findContentByTitle(title);
+      return res.status(200).json(item);
     } catch (error) {
       console.error(error);
       return res.status(400).json({ error });
@@ -33,8 +33,8 @@ export class ContentController implements Controller {
 
   async index(req: Request, res: Response) {
     try {
-      const items = await contentService.getAllContents();
-      return res.status(200).json( items );
+      const items = await contentService.findAllContents();
+      return res.status(200).json(items);
     } catch (error) {
       console.error(error);
       return res.status(400).json({ error });
@@ -44,8 +44,8 @@ export class ContentController implements Controller {
   async indexGenres(req: Request, res: Response) {
     const { genre } = req.params;
     try {
-      const items = await contentService.getContentsByGenre(genre);
-      return res.status(200).json( items );
+      const items = await contentService.findContentsByGenre(genre);
+      return res.status(200).json(items);
     } catch (error) {
       console.error(error);
       return res.status(200).json({ error });
@@ -55,7 +55,7 @@ export class ContentController implements Controller {
   async delete(req: Request, res: Response) {
     const { id } = req.params;
     try {
-      await contentService.deleteContent(id);
+      await contentService.destroyContent(id);
       return res
         .status(200)
         .json({ status_code: 200, message: 'content deleted' });

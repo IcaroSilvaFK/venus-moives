@@ -12,7 +12,7 @@ export class UserController implements Controller {
   async store(req: Request, res: Response) {
     const data: IUser = req.body;
     try {
-      await userService.create(data);
+      await userService.createUser(data);
       return res.status(201).json({ status_code: 201, message: 'ok' });
     } catch (error) {
       console.error(error);

@@ -1,5 +1,5 @@
 import { IUser } from '../Data/IUser';
 
 export interface IUserService {
-  create: (data: IUser) => Promise<void>;
+  createUser: (data: IUser) => Promise<void>;
 }

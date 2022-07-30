@@ -24,8 +24,8 @@ export class GenreController implements Controller {
   async show(req: Request, res: Response) {
     const { genre } = req.params;
     try {
-      const item = await genreService.getGenreByName(genre);
-      return res.status(200).json( item );
+      const item = await genreService.findGenre(genre);
+      return res.status(200).json(item);
     } catch (error) {
       console.error(error);
       return res.status(400).json({ error });
@@ -34,8 +34,8 @@ export class GenreController implements Controller {
 
   async index(req: Request, res: Response) {
     try {
-      const items = await genreService.getAllGenres();
-      return res.status(200).json( items );
+      const items = await genreService.findAllGenres();
+      return res.status(200).json(items);
     } catch (error) {
       console.error(error);
       return res.status(400).json({ error });
@@ -45,7 +45,7 @@ export class GenreController implements Controller {
   async delete(req: Request, res: Response) {
     const { id } = req.params;
     try {
-      await genreService.deleteGenre(id);
+      await genreService.destroyGenre(id);
       return res.status(200).json({ message: 'deleted' });
     } catch (error) {
       console.error(error);

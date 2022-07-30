@@ -38,18 +38,18 @@ export class ContentService implements IContentService {
     await this.contentRepository.create(_data);
   }
 
-  async getContentByTitle(title: string): Promise<IContent | null> {
-    const content = await this.contentRepository.getContentByTitle(title);
+  async findContentByTitle(title: string): Promise<IContent | null> {
+    const content = await this.contentRepository.findOne(title);
     if (!content) throw new HttpError(404, 'content not available');
     return content;
   }
 
-  async getAllContents(): Promise<IContent[]> {
-    const contents = await this.contentRepository.getAllContents();
+  async findAllContents(): Promise<IContent[]> {
+    const contents = await this.contentRepository.findAllContents();
     return contents;
   }
 
-  async getContentsByGenre(genre: string): Promise<IContent[]> {
+  async findContentsByGenre(genre: string): Promise<IContent[]> {
     const _genre = genre
       .toLowerCase()
       .normalize('NFD')
@@ -57,19 +57,19 @@ export class ContentService implements IContentService {
 
     console.log(_genre);
 
-    const contents = await this.contentRepository.getContentsByGenre(_genre);
+    const contents = await this.contentRepository.findContentsByGenre(_genre);
     if (!contents) throw new HttpError(404, 'content not available');
 
     return contents;
   }
 
-  async deleteContent(id: string): Promise<void> {
-    await this.contentRepository.deleteContent(id);
+  async destroyContent(id: string): Promise<void> {
+    await this.contentRepository.destroy(id);
   }
 
   async updateContent(data: IContent, id: string): Promise<void> {
     const emptyFields = await this.hasEmptyFields(data);
     if (emptyFields) throw new HttpError(400, 'The fields must be filled');
-    await this.contentRepository.updateContent(data, id);
+    await this.contentRepository.update(data, id);
   }
 }

@@ -21,7 +21,7 @@ export class ContentRepository implements IContentRepository {
     });
   }
 
-  async getContentByTitle(title: string): Promise<IContent | null> {
+  async findOne(title: string): Promise<IContent | null> {
     const content = await this.contentModel.findOne({
       where: {
         title: title
@@ -30,12 +30,12 @@ export class ContentRepository implements IContentRepository {
     return content?.get() as IContent;
   }
 
-  async getAllContents(): Promise<any> {
+  async findAllContents(): Promise<any> {
     const contents = await this.contentModel.findAll();
     return contents;
   }
 
-  async getContentsByGenre(genre: string): Promise<any> {
+  async findContentsByGenre(genre: string): Promise<any> {
     const contents = await this.contentModel.findAll({
       where: {
         genre: {
@@ -46,7 +46,7 @@ export class ContentRepository implements IContentRepository {
     return contents;
   }
 
-  async deleteContent(id: string) {
+  async destroy(id: string) {
     await this.contentModel.destroy({
       where: {
         id: id
@@ -54,7 +54,7 @@ export class ContentRepository implements IContentRepository {
     });
   }
 
-  async updateContent(data: IContent, id: string) {
+  async update(data: IContent, id: string) {
     await this.contentModel.update(
       {
         title: data.title,

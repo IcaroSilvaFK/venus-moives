@@ -10,7 +10,7 @@ export class GenreRepository {
     });
   }
 
-  async getGenreByName(genre: string): Promise<IGenre> {
+  async findOne(genre: string): Promise<IGenre> {
     const _genre = await this.genreModel.findOne({
       where: {
         genre: genre
@@ -19,12 +19,12 @@ export class GenreRepository {
     return _genre?.get() as IGenre;
   }
 
-  async getAllGenres(): Promise<any> {
+  async findAll(): Promise<any> {
     const genres = await this.genreModel.findAll();
     return genres;
   }
 
-  async deleteGenre(id: string): Promise<void> {
+  async destroy(id: string): Promise<void> {
     await this.genreModel.destroy({
       where: {
         id: id
