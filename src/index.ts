@@ -25,4 +25,3 @@ app.use('/api', genreRoutes);
 
 app.listen(process.env.PORT || 5000);
 
-export { app };
