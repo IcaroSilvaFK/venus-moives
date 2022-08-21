@@ -3,12 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/server.ts",
+
   "scripts": {
-    "build": "tsc --build",
-    "start": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/server.ts",
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/server.ts",
-    "lint": "eslint . --ext .ts",
-    "lint-fix": "eslint . --ext .ts --fix"
+    "start": "node dist/server.js",
+    "build": "tsc"
   },
   "type": "module",
   "keywords": [],
