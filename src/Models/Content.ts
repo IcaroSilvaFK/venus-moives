@@ -1,10 +1,9 @@
-import { link } from 'fs';
 import { DataTypes } from 'sequelize';
-import { DB } from 'src/config/DB';
-import { IContent } from 'src/Interfaces/Data/IContent';
-import { IModel } from 'src/Interfaces/Model/IModel';
+import { IContent } from '@interfaces/data/IContent';
+import { IModel } from '@interfaces/model/IModel';
+import { db } from '@config/database';
 
-const Content: IModel<IContent> = DB.define(
+const Content: IModel<IContent> = db.define(
   'contents',
   {
     id: {

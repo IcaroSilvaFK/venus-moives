@@ -1,5 +1,5 @@
-import { IGenre } from 'src/Interfaces/Data/IGenre';
-import { IModel } from 'src/Interfaces/Model/IModel';
+import { IGenre } from '@interfaces/data/IGenre';
+import { IModel } from '@interfaces/model/IModel';
 
 export class GenreRepository {
   constructor(private genreModel: IModel<IGenre>) {}

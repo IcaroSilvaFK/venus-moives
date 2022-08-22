@@ -1,14 +1,13 @@
 import { Request, Response } from 'express';
-import { Controller } from 'src/Controllers/Controller';
-import { IContent } from 'src/Interfaces/Data/IContent';
-import { Content } from 'src/Models/Content';
-import { ContentRepository } from 'src/Repositories/ContentRepository';
-import { ContentService } from 'src/Services/ContentService';
+import { IContent } from '@interfaces/data/IContent';
+import { Content } from '@models/Content';
+import { ContentRepository } from '@repositories/ContentRepository';
+import { ContentService } from '@services/ContentService';
 
 const contentRepository = new ContentRepository(Content);
 const contentService = new ContentService(contentRepository);
 
-export class ContentController implements Controller {
+export class ContentController {
   async store(req: Request, res: Response) {
     const data: IContent = req.body;
     try {

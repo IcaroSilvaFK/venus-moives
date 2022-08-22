@@ -1,4 +1,4 @@
-import { IContent } from '../Data/IContent';
+import { IContent } from '@interfaces/data/IContent';
 
 export interface IContentRepository {
   create: (data: IContent) => Promise<void>;

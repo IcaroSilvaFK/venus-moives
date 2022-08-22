@@ -1,5 +1,6 @@
+import 'dotenv/config';
+import { HttpError } from '@errors/HttpError';
 import { NextFunction, Request, Response } from 'express';
-import { HttpError } from 'src/Exeptions/HttpError';
 import jwt from 'jsonwebtoken';
 
 export class AuthMiddleware {
@@ -17,10 +18,12 @@ export class AuthMiddleware {
       if (!/^Bearer$/i.test(_prefix))
         throw new HttpError(400, 'invalid prefix');
 
-      if (tokenParts.length < 3)
-        throw new HttpError(400, 'token mal formated');
+      if (tokenParts.length < 3) throw new HttpError(400, 'token mal formated');
 
-      const isValidToken = jwt.verify(_token, process.env.SECRET_KEY as string);
+      const isValidToken = jwt.verify(
+        _token,
+        process.env['SECRET_KEY'] as string
+      );
       if (!isValidToken) throw new HttpError(400, 'invalid token');
 
       next();

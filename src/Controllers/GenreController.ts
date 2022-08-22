@@ -1,15 +1,14 @@
 import { Response } from 'express';
 import { Request } from 'express-serve-static-core';
-import { Controller } from 'src/Controllers/Controller';
-import { IGenre } from 'src/Interfaces/Data/IGenre';
-import { Genre } from 'src/Models/Genre';
-import { GenreRepository } from 'src/Repositories/GenreRepository';
-import { GenreService } from 'src/Services/GenreService';
+import { IGenre } from '@interfaces/data/IGenre';
+import { Genre } from '@models/Genre';
+import { GenreRepository } from '@repositories/GenreRepository';
+import { GenreService } from '@services/GenreService';
 
 const genreRepository = new GenreRepository(Genre);
 const genreService = new GenreService(genreRepository);
 
-export class GenreController implements Controller {
+export class GenreController {
   async store(req: Request, res: Response) {
     const data: IGenre = req.body;
     try {

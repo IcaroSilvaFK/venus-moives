@@ -1,6 +1,6 @@
-import { IUser } from 'src/Interfaces/Data/IUser';
-import { IModel } from 'src/Interfaces/Model/IModel';
-import { IUserRepository } from 'src/Interfaces/Repository/IUserRepository';
+import { IUser } from '@interfaces/data/IUser';
+import { IModel } from '@interfaces/model/IModel';
+import { IUserRepository } from '@interfaces/repository/IUserRepository';
 
 export class UserRepository implements IUserRepository {
   constructor(private userModel: IModel<IUser>) {}

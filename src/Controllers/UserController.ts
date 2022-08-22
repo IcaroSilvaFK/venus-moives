@@ -1,14 +1,13 @@
 import { Request, Response } from 'express-serve-static-core';
-import { Controller } from 'src/Controllers/Controller';
-import { IUser } from 'src/Interfaces/Data/IUser';
-import { User } from 'src/Models/User';
-import { UserRepository } from 'src/Repositories/UserRepository';
-import { UserService } from 'src/Services/UserService';
+import { IUser } from '@interfaces/data/IUser';
+import { User } from '@models/User';
+import { UserRepository } from '@repositories/UserRepository';
+import { UserService } from '@services/UserService';
 
 const userRepository = new UserRepository(User);
 const userService = new UserService(userRepository);
 
-export class UserController implements Controller {
+export class UserController {
   async login(req: Request, res: Response) {
     const data: IUser = req.body;
     try {

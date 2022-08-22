@@ -1,4 +1,4 @@
-import { IGenre } from '../Data/IGenre';
+import { IGenre } from "@interfaces/data/IGenre";
 
 export interface IGenreRepository {
   create: (data: IGenre) => Promise<void>;

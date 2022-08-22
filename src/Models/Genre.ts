@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
-import { DB } from 'src/config/DB';
-import { IGenre } from 'src/Interfaces/Data/IGenre';
-import { IModel } from 'src/Interfaces/Model/IModel';
+import { IGenre } from '@interfaces/data/IGenre';
+import { IModel } from '@interfaces/model/IModel';
+import { db } from '@config/database';
 
-const Genre: IModel<IGenre> = DB.define(
+const Genre: IModel<IGenre> = db.define(
   'genres',
   {
     id: {

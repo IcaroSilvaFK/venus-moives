@@ -1,8 +1,9 @@
+import 'dotenv/config';
+import { db } from '@config/database';
+import { router as useRroutes } from '@routes/ContentRoutes';
+import { router as contentRoutes } from '@routes/ContentRoutes';
+import { router as genreRoutes } from '@routes/ContentRoutes';
 import express from 'express';
-import { DB } from './config/DB';
-import { router as useRroutes } from './routes/UserRoutes';
-import { router as contentRoutes } from './routes/ContentRoutes';
-import { router as genreRoutes } from './routes/GenreRoutes';
 
 const app = express();
 
@@ -10,8 +11,8 @@ app.use(express.json());
 
 (async () => {
   try {
-    await DB.authenticate();
-    // await DB.sync({ force: true });
+    await db.authenticate();
+    // await db.sync({ force: true });
     app.emit('connected database');
   } catch (error) {
     console.log('failed to connect to database');
@@ -23,5 +24,4 @@ app.use('/api', useRroutes);
 app.use('/api', contentRoutes);
 app.use('/api', genreRoutes);
 
-app.listen(process.env.PORT || 5000);
-
+app.listen(process.env['PORT'] || 5000);

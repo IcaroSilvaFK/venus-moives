@@ -1,7 +1,8 @@
-import { HttpError } from 'src/Exeptions/HttpError';
-import { IUser } from 'src/Interfaces/Data/IUser';
-import { IUserRepository } from 'src/Interfaces/Repository/IUserRepository';
-import { IUserService } from 'src/Interfaces/Service/IUserService';
+import 'dotenv/config';
+import { HttpError } from '@errors/HttpError';
+import { IUser } from '@interfaces/data/IUser';
+import { IUserRepository } from '@interfaces/repository/IUserRepository';
+import { IUserService } from '@interfaces/service/IUserService';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
@@ -49,7 +50,7 @@ export class UserService implements IUserService {
         id: user.id,
         user: user.name
       },
-      process.env.SECRET_KEY as string,
+      process.env['SECRET_KEY'] as string,
       { expiresIn: 86400 }
     );
     return token;

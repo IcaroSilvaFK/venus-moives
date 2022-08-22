@@ -1,7 +1,7 @@
-import { IGenre } from 'src/Interfaces/Data/IGenre';
-import { IGenreRepository } from 'src/Interfaces/Repository/IGenreRepository';
-import { IGenreService } from 'src/Interfaces/Service/IGenreService';
-import { HttpError } from 'src/Exeptions/HttpError';
+import { HttpError } from '@errors/HttpError';
+import { IGenre } from '@interfaces/data/IGenre';
+import { IGenreRepository } from '@interfaces/repository/IGenreRepository';
+import { IGenreService } from '@interfaces/service/IGenreService';
 
 export class GenreService implements IGenreService {
   constructor(private genreRepository: IGenreRepository) {}

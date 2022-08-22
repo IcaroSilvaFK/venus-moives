@@ -1,4 +1,4 @@
-import { IGenre } from '../Data/IGenre';
+import { IGenre } from "@interfaces/data/IGenre";
 
 export interface IGenreService {
   createGenre: (data: IGenre) => Promise<void>;

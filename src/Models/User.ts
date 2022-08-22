@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
-import { DB } from 'src/config/DB';
-import { IUser } from 'src/Interfaces/Data/IUser';
-import { IModel } from 'src/Interfaces/Model/IModel';
+import { IUser } from '@interfaces/data/IUser';
+import { IModel } from '@interfaces/model/IModel';
+import { db } from '@config/database';
 
-const User: IModel<IUser> = DB.define(
+const User: IModel<IUser> = db.define(
   'users',
   {
     id: {

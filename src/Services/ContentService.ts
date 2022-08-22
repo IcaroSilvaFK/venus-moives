@@ -1,7 +1,7 @@
-import { HttpError } from 'src/Exeptions/HttpError';
-import { IContent } from 'src/Interfaces/Data/IContent';
-import { IContentRepository } from 'src/Interfaces/Repository/IContentRepository';
-import { IContentService } from 'src/Interfaces/Service/IContentService';
+import { HttpError } from '@errors/HttpError';
+import { IContent } from '@interfaces/data/IContent';
+import { IContentRepository } from '@interfaces/repository/IContentRepository';
+import { IContentService } from '@interfaces/service/IContentService';
 
 export class ContentService implements IContentService {
   constructor(private contentRepository: IContentRepository) {}

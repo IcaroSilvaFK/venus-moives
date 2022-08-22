@@ -1,8 +1,7 @@
-import { generateKey } from 'crypto';
 import { Model, Op, where } from 'sequelize';
-import { IContent } from 'src/Interfaces/Data/IContent';
-import { IModel } from 'src/Interfaces/Model/IModel';
-import { IContentRepository } from 'src/Interfaces/Repository/IContentRepository';
+import { IContent } from '@interfaces/data/IContent';
+import { IModel } from '@interfaces/model/IModel';
+import { IContentRepository } from '@interfaces/repository/IContentRepository';
 
 export class ContentRepository implements IContentRepository {
   constructor(private contentModel: IModel<IContent>) {}
