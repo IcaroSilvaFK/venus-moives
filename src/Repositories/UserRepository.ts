@@ -1,6 +1,6 @@
 import { IUserRepository } from '../Interfaces/Repository/IUserRepository';
 import { Users } from '@prisma/client';
-import { prismaClient } from 'config/global/prisma';
+import { prismaClient } from '../config/global/prisma';
 
 export class UserRepository {
   async create(data: Users): Promise<Users> {

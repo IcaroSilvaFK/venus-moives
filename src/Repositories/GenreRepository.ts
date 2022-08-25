@@ -1,5 +1,5 @@
 import { Genres } from '@prisma/client';
-import { prismaClient } from 'config/global/prisma';
+import { prismaClient } from '../config/global/prisma';
 import { IGenreRepository } from '../Interfaces/Repository/IGenreRepository';
 
 export class GenreRepository implements IGenreRepository {

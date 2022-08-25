@@ -3,22 +3,10 @@
     "noImplicitAny": false,
     "noEmitOnError": true,
     "sourceMap": true,
-    "target": "ES2017",
+    "target": "ESNext",
     "lib": ["es6"],
     "module": "commonjs",
     "rootDir": "src",
-    "baseUrl": "src",
-    "paths": {
-      "@controllers/*": ["./src/controllers/*"],
-      "@middlewares/*": ["./src/middlewares/*"],
-      "@models/*": ["./src/models/*"],
-      "@repositories/*": ["./src/repositories/*"],
-      "@routes/*": ["./src/routes/*"],
-      "@services/*": ["./src/services/*"],
-      "@interfaces/*": ["./src/interfaces/*"],
-      "@errors/*": ["./src/errors/*"],
-      "@config/*": ["./src/config/*"]
-    },
     "resolveJsonModule": true,
     "allowJs": true,
     "outDir": "dist",
@@ -29,5 +17,7 @@
     "noPropertyAccessFromIndexSignature": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
-  }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }
