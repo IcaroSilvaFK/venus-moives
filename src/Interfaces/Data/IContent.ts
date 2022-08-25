@@ -1,5 +1,4 @@
 export interface IContent {
-  id?: string;
   title: string;
   released: string;
   runtime: string;

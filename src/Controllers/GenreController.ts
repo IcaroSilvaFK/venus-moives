@@ -1,16 +1,15 @@
 import { Response } from 'express';
 import { Request } from 'express-serve-static-core';
-import { IGenre } from '@interfaces/data/IGenre';
-import { Genre } from '@models/Genre';
-import { GenreRepository } from '@repositories/GenreRepository';
-import { GenreService } from '@services/GenreService';
+import { Genres } from '@prisma/client';
+import { GenreRepository } from '../Repositories/GenreRepository';
+import { GenreService } from '../Services/GenreService';
 
-const genreRepository = new GenreRepository(Genre);
+const genreRepository = new GenreRepository();
 const genreService = new GenreService(genreRepository);
 
 export class GenreController {
   async store(req: Request, res: Response) {
-    const data: IGenre = req.body;
+    const data: Genres = req.body;
     try {
       await genreService.createGenre(data);
       return res.status(201).json({ message: 'ok' });

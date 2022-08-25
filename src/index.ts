@@ -1,27 +1,22 @@
 import 'dotenv/config';
-import { db } from '@config/database';
-import { router as useRroutes } from '@routes/ContentRoutes';
-import { router as contentRoutes } from '@routes/ContentRoutes';
-import { router as genreRoutes } from '@routes/ContentRoutes';
-import express from 'express';
+import 'express-group-routes';
+import { router as useRroutes } from './routes/UserRoutes';
+import { router as contentRoutes } from './routes/ContentRoutes';
+import { router as genreRoutes } from './routes/GenreRoutes';
+
+import express, { Router } from 'express';
 
 const app = express();
 
 app.use(express.json());
 
-(async () => {
-  try {
-    await db.authenticate();
-    // await db.sync({ force: true });
-    app.emit('connected database');
-  } catch (error) {
-    console.log('failed to connect to database');
-    console.error(error);
-  }
-})();
+//@ts-ignore
+app.group('/api', (router: Router) => {
+  router.use(useRroutes, contentRoutes, genreRoutes);
+});
 
-app.use('/api', useRroutes);
-app.use('/api', contentRoutes);
-app.use('/api', genreRoutes);
-
-app.listen(process.env['PORT'] || 5000);
+app.listen(process.env['PORT'] || 5000, () =>
+  console.log(
+    `server running at http://localhost:${process.env['PORT'] || 5000}`
+  )
+);

@@ -1,33 +1,30 @@
-import { IGenre } from '@interfaces/data/IGenre';
-import { IModel } from '@interfaces/model/IModel';
+import { Genres } from '@prisma/client';
+import { prismaClient } from 'config/global/prisma';
+import { IGenreRepository } from '../Interfaces/Repository/IGenreRepository';
 
-export class GenreRepository {
-  constructor(private genreModel: IModel<IGenre>) {}
-
-  async create(data: IGenre): Promise<void> {
-    await this.genreModel.create({
-      genre: data.genre
+export class GenreRepository implements IGenreRepository {
+  async create(data: Genres): Promise<void> {
+    await prismaClient.genres.create({
+      data: data
     });
   }
 
-  async findOne(genre: string): Promise<IGenre> {
-    const _genre = await this.genreModel.findOne({
+  async findOne(genre: string): Promise<Genres | null> {
+    return await prismaClient.genres.findFirst({
       where: {
-        genre: genre
+        genre
       }
     });
-    return _genre?.get() as IGenre;
   }
 
-  async findAll(): Promise<any> {
-    const genres = await this.genreModel.findAll();
-    return genres;
+  async findAll(): Promise<Genres[]> {
+    return await prismaClient.genres.findMany();
   }
 
   async destroy(id: string): Promise<void> {
-    await this.genreModel.destroy({
+    await prismaClient.genres.delete({
       where: {
-        id: id
+        id
       }
     });
   }

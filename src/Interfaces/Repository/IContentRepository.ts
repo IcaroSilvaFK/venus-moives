@@ -1,10 +1,9 @@
-import { IContent } from '@interfaces/data/IContent';
-
+import { Content } from '@prisma/client';
 export interface IContentRepository {
-  create: (data: IContent) => Promise<void>;
-  findOne: (title: string) => Promise<IContent | null>;
-  findAllContents: () => Promise<IContent[]>;
-  findContentsByGenre: (genre: string) => Promise<IContent[]>;
+  create: (data: Content) => Promise<void>;
+  findOne: (title: string) => Promise<Content | null>;
+  findAllContents: () => Promise<Content[]>;
+  findContentsByGenre: (genre: string) => Promise<Content[]>;
   destroy: (id: string) => Promise<void>;
-  update: (data: IContent, id: string) => Promise<void>;
+  update: (data: Content, id: string) => Promise<void>;
 }

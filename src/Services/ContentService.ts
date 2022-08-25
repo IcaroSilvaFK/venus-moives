@@ -1,45 +1,34 @@
-import { HttpError } from '@errors/HttpError';
-import { IContent } from '@interfaces/data/IContent';
-import { IContentRepository } from '@interfaces/repository/IContentRepository';
-import { IContentService } from '@interfaces/service/IContentService';
+import { HttpError } from '../errors/HttpError';
+import { IContent } from '../Interfaces/Data/IContent';
+import { ContentRepository } from '../Repositories/ContentRepository';
+import { Content } from '@prisma/client';
 
-export class ContentService implements IContentService {
-  constructor(private contentRepository: IContentRepository) {}
+interface IContentProps extends Content {
+  genres: string[];
+}
 
-  async hasEmptyFields(data: IContent) {
+export class ContentService {
+  constructor(private contentRepository: ContentRepository) {}
+
+  async hasEmptyFields(data: IContentProps) {
     return Object.values(data)
       .map((values) => !!values)
       .includes(false);
   }
 
-  async createContent(data: IContent): Promise<void> {
+  async createContent(data: IContentProps): Promise<void> {
     const emptyFields = await this.hasEmptyFields(data);
     if (emptyFields) throw new HttpError(400, 'The fields must be filled');
 
-    const { genre } = data;
-    const genre_parsed = genre.map((values) =>
-      values
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-    );
+    const { genres, ...rest } = data;
 
-    const _data = {
-      title: data.title,
-      released: data.released,
-      runtime: data.runtime,
-      director: data.director,
-      plot: data.plot,
-      language: data.language,
-      poster: data.poster,
-      country: data.country,
-      link: data.link,
-      genre: genre_parsed
-    };
-    await this.contentRepository.create(_data);
+    await this.contentRepository.create({
+      ...rest,
+      genres
+    });
   }
 
-  async findContentByTitle(title: string): Promise<IContent | null> {
+  async findContentByTitle(title: string) {
     const content = await this.contentRepository.findOne(title);
     if (!content) throw new HttpError(404, 'content not available');
     return content;
@@ -68,7 +57,7 @@ export class ContentService implements IContentService {
     await this.contentRepository.destroy(id);
   }
 
-  async updateContent(data: IContent, id: string): Promise<void> {
+  async updateContent(data: IContentProps, id: string): Promise<void> {
     const emptyFields = await this.hasEmptyFields(data);
     if (emptyFields) throw new HttpError(400, 'The fields must be filled');
 

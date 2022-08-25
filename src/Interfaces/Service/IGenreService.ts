@@ -1,7 +1,7 @@
-import { IGenre } from "@interfaces/data/IGenre";
+import { Genres } from '@prisma/client';
 
 export interface IGenreService {
-  createGenre: (data: IGenre) => Promise<void>;
+  createGenre: (data: Genres) => Promise<void>;
   findAllGenres: () => Promise<any>;
   destroyGenre: (id: string) => Promise<void>;
 }

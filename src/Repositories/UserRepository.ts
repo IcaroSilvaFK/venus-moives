@@ -1,25 +1,19 @@
-import { IUser } from '@interfaces/data/IUser';
-import { IModel } from '@interfaces/model/IModel';
-import { IUserRepository } from '@interfaces/repository/IUserRepository';
+import { IUserRepository } from '../Interfaces/Repository/IUserRepository';
+import { Users } from '@prisma/client';
+import { prismaClient } from 'config/global/prisma';
 
-export class UserRepository implements IUserRepository {
-  constructor(private userModel: IModel<IUser>) {}
-
-  async create(data: IUser): Promise<void> {
-    await this.userModel.create({
-      name: data.name,
-      age: data.age,
-      email: data.email,
-      password: data.password
+export class UserRepository {
+  async create(data: Users): Promise<Users> {
+    return await prismaClient.users.create({
+      data: data
     });
   }
 
-  async findOneByEmail(email: string): Promise<IUser> {
-    const user = await this.userModel.findOne({
+  async findOneByEmail(email: string): Promise<Users | null> {
+    return await prismaClient.users.findFirst({
       where: {
-        email: email
+        email
       }
     });
-    return user?.get() as IUser;
   }
 }

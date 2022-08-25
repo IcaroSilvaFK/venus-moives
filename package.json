@@ -4,37 +4,38 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "tsx watch src/index.ts",
     "build": "tsc --build",
-    "clean": "tsc --build --clean",
-    "start": ""
+    "clean": "tsc --build --clean"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Christofher",
   "license": "ISC",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.8",
-    "@types/sequelize": "^4.28.14",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.2.0",
     "prettier": "^2.5.1",
+    "prisma": "^4.2.1",
     "ts-node-dev": "^1.1.8",
     "tsconfig-paths": "^3.12.0",
+    "tsx": "^3.8.2",
     "typescript": "^4.5.5"
   },
   "dependencies": {
+    "@prisma/client": "^4.2.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-group-routes": "^1.1.0",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
-    "pg-hstore": "^2.3.4",
-    "sequelize": "^6.21.2"
+    "pg-hstore": "^2.3.4"
   }
 }

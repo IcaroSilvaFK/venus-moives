@@ -1,6 +1,6 @@
-import { IUser } from '@interfaces/data/IUser';
-
+import { IUser } from '../Data/IUser';
+import { Users } from '@prisma/client';
 export interface IUserRepository {
-  create: (data: IUser) => Promise<void>;
-  findOneByEmail: (email: string) => Promise<IUser>;
+  create: (data: Users) => Promise<Users>;
+  findOneByEmail: (email: string) => Promise<Users>;
 }

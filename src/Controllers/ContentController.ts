@@ -1,15 +1,18 @@
+import { Content } from '@prisma/client';
 import { Request, Response } from 'express';
-import { IContent } from '@interfaces/data/IContent';
-import { Content } from '@models/Content';
-import { ContentRepository } from '@repositories/ContentRepository';
-import { ContentService } from '@services/ContentService';
+import { ContentRepository } from '../Repositories/ContentRepository';
+import { ContentService } from '../Services/ContentService';
 
-const contentRepository = new ContentRepository(Content);
+interface IContentProps extends Content {
+  genres: string[];
+}
+
+const contentRepository = new ContentRepository();
 const contentService = new ContentService(contentRepository);
 
 export class ContentController {
   async store(req: Request, res: Response) {
-    const data: IContent = req.body;
+    const data: IContentProps = req.body;
     try {
       await contentService.createContent(data);
       return res.status(201).json({ status_code: 201, message: 'saved' });
@@ -67,7 +70,7 @@ export class ContentController {
   async update(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const data: IContent = req.body;
+      const data: IContentProps = req.body;
       await contentService.updateContent(data, id);
       return res
         .status(200)

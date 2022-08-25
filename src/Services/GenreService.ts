@@ -1,7 +1,8 @@
-import { HttpError } from '@errors/HttpError';
-import { IGenre } from '@interfaces/data/IGenre';
-import { IGenreRepository } from '@interfaces/repository/IGenreRepository';
-import { IGenreService } from '@interfaces/service/IGenreService';
+import { HttpError } from '../errors/HttpError';
+import { IGenre } from '../Interfaces/Data/IGenre';
+import { IGenreRepository } from '../Interfaces/Repository/IGenreRepository';
+import { IGenreService } from '../Interfaces/Service/IGenreService';
+import { Genres } from '@prisma/client';
 
 export class GenreService implements IGenreService {
   constructor(private genreRepository: IGenreRepository) {}
@@ -11,7 +12,7 @@ export class GenreService implements IGenreService {
       .includes(false);
   }
 
-  async createGenre(data: IGenre): Promise<void> {
+  async createGenre(data: Genres): Promise<void> {
     const emptyFields = await this.hasEmptyFields(data);
     if (emptyFields) throw new HttpError(400, 'The fields must be filled');
 
@@ -21,7 +22,7 @@ export class GenreService implements IGenreService {
     await this.genreRepository.create(data);
   }
 
-  async findGenre(genre: string): Promise<IGenre> {
+  async findGenre(genre: string): Promise<Genres | null> {
     const _genre = await this.genreRepository.findOne(genre);
     return _genre;
   }

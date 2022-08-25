@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Content{
+  id          String @id @default(cuid())
+  title       String
+  release     String
+  runtime     String
+  director    String
+  plot        String
+  language    String
+  poster      String
+  link        String
+  country     String
+  genres      Genres[]
+  favorites   Favorites[]
+
+
+}
+
+model Genres {
+  id          String @id @default(cuid())
+  genre       String
+  content_id  String
+  content     Content @relation(fields: [content_id], references: [id])
+
+  @@map("genres")
+}
+
+model Users{
+  id String @id @default(cuid())
+  name String
+  age String
+  email String @unique
+  password String
+  favoreites Favorites[]
+
+
+  @@map("users")
+}
+
+
+model Favorites{
+  id String @id @default(cuid())
+  content_id String
+  user_id String
+
+  content Content @relation(fields: [content_id],references: [id])
+  user Users @relation(fields: [user_id],references: [id])
+}

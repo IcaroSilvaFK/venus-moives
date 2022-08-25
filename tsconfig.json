@@ -7,7 +7,7 @@
     "lib": ["es6"],
     "module": "commonjs",
     "rootDir": "src",
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
       "@controllers/*": ["./src/controllers/*"],
       "@middlewares/*": ["./src/middlewares/*"],
@@ -17,7 +17,7 @@
       "@services/*": ["./src/services/*"],
       "@interfaces/*": ["./src/interfaces/*"],
       "@errors/*": ["./src/errors/*"],
-      "@config/*": ["./src/config/*"],
+      "@config/*": ["./src/config/*"]
     },
     "resolveJsonModule": true,
     "allowJs": true,
@@ -29,6 +29,5 @@
     "noPropertyAccessFromIndexSignature": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
-  },
-  "include": ["src"]
+  }
 }

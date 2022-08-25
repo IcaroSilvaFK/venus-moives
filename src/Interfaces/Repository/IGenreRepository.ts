@@ -1,8 +1,8 @@
-import { IGenre } from "@interfaces/data/IGenre";
+import { Genres } from '@prisma/client';
 
 export interface IGenreRepository {
-  create: (data: IGenre) => Promise<void>;
-  findOne(genre: string): Promise<IGenre>;
-  findAll: () => Promise<any>;
+  create: (data: Genres) => Promise<void>;
+  findOne(genre: string): Promise<Genres | null>;
+  findAll: () => Promise<Genres[]>;
   destroy: (id: string) => Promise<void>;
 }

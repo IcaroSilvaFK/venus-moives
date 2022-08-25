@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { HttpError } from '@errors/HttpError';
+import { HttpError } from '../errors/HttpError';
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 

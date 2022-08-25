@@ -1,77 +1,68 @@
-import { Model, Op, where } from 'sequelize';
-import { IContent } from '@interfaces/data/IContent';
-import { IModel } from '@interfaces/model/IModel';
-import { IContentRepository } from '@interfaces/repository/IContentRepository';
+import { prismaClient } from '../config/global/prisma';
+import { Content } from '@prisma/client';
 
-export class ContentRepository implements IContentRepository {
-  constructor(private contentModel: IModel<IContent>) {}
+interface IcontentCreate extends Content {
+  genres: string[];
+}
 
-  async create(data: IContent): Promise<void> {
-    await this.contentModel.create({
-      title: data.title,
-      released: data.released,
-      runtime: data.runtime,
-      director: data.director,
-      plot: data.plot,
-      language: data.language,
-      poster: data.poster,
-      country: data.country,
-      link: data.link,
-      genre: data.genre
-    });
-  }
-
-  async findOne(title: string): Promise<IContent | null> {
-    const content = await this.contentModel.findOne({
-      where: {
-        title: title
+export class ContentRepository {
+  async create({ genres, ...rest }: IcontentCreate): Promise<void> {
+    const { id } = await prismaClient.content.create({
+      data: {
+        ...rest
       }
     });
-    return content?.get() as IContent;
+
+    for (let genre of genres) {
+      await prismaClient.genres.create({
+        data: {
+          content_id: id,
+          genre
+        }
+      });
+    }
+  }
+
+  async findOne(title: string): Promise<Content | null> {
+    return await prismaClient.content.findFirst({
+      where: {
+        title
+      }
+    });
   }
 
   async findAllContents(): Promise<any> {
-    const contents = await this.contentModel.findAll();
-    return contents;
+    return await prismaClient.content.findMany();
   }
 
   async findContentsByGenre(genre: string): Promise<any> {
-    const contents = await this.contentModel.findAll({
+    return await prismaClient.content.findMany({
       where: {
-        genre: {
-          [Op.substring]: genre
-        } as any
+        genres: {
+          some: {
+            genre
+          }
+        }
       }
     });
-    return contents;
   }
 
   async destroy(id: string) {
-    await this.contentModel.destroy({
+    await prismaClient.content.delete({
       where: {
-        id: id
+        id
       }
     });
   }
 
-  async update(data: IContent, id: string) {
-    await this.contentModel.update(
-      {
-        title: data.title,
-        released: data.released,
-        runtime: data.runtime,
-        director: data.director,
-        plot: data.plot,
-        language: data.language,
-        poster: data.poster,
-        country: data.country,
-        genre: data.genre
+  async update({ ...rest }: Partial<IcontentCreate>, id: string) {
+    await prismaClient.content.update({
+      where: {
+        id
       },
-      {
-        where: {
-          id: id
-        }
+      data: {
+        ...rest
       }
-    );
+    });
   }
 }
