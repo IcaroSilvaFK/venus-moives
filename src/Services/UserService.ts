@@ -50,7 +50,7 @@ export class UserService implements IUserService {
         id: user.id,
         user: user.name
       },
-      process.env['SECRET_KEY'] as string,
+      process.env.SECRET_KEY as string,
       { expiresIn: 86400 }
     );
     return token;

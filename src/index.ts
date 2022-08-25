@@ -15,8 +15,6 @@ app.group('/api', (router: Router) => {
   router.use(useRroutes, contentRoutes, genreRoutes);
 });
 
-app.listen(process.env['PORT'] || 5000, () =>
-  console.log(
-    `server running at http://localhost:${process.env['PORT'] || 5000}`
-  )
+app.listen(process.env.PORT || 5000, () =>
+  console.log(`server running at http://localhost:${process.env.PORT || 5000}`)
 );

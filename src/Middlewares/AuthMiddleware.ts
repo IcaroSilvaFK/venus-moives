@@ -20,10 +20,7 @@ export class AuthMiddleware {
 
       if (tokenParts.length < 3) throw new HttpError(400, 'token mal formated');
 
-      const isValidToken = jwt.verify(
-        _token,
-        process.env['SECRET_KEY'] as string
-      );
+      const isValidToken = jwt.verify(_token, process.env.SECRET_KEY as string);
       if (!isValidToken) throw new HttpError(400, 'invalid token');
 
       next();
